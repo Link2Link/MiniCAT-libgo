@@ -85,9 +85,9 @@
 #  ifndef __extension__
 #     define __extension__
 #  endif
-#  ifndef __const__
-#     define __const__ const
-#  endif
+//#  ifndef __const__
+//#     define __const__ const
+//#  endif
 #  ifndef __volatile__
 #     define __volatile__ volatile
 #  endif
