@@ -22,6 +22,7 @@
 #include <memory>
 #include <queue>
 #include <algorithm>
+#include <stdexcept>
 
 #define LIBGO_DEBUG 0
 #define DEBUG_ROUTINE_SYNC_IN_LIBGO 1
