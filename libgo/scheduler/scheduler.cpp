@@ -62,7 +62,9 @@ Scheduler* Scheduler::Create()
 Scheduler::Scheduler()
 {
     LibgoInitialize();
-    processers_.push_back(new Processer(this, 0));
+    auto p = new Processer(this, processers_.size());
+    p->NativeId = NativeThreadID();
+    processers_.push_back(p);   // 第一个为本线程
 }
 
 Scheduler::~Scheduler()
@@ -197,6 +199,7 @@ void Scheduler::NewProcessThread()
     DebugPrint(dbg_scheduler, "---> Create Processer(%d)", p->id_);
     std::thread t([this, p]{
             DebugPrint(dbg_thread, "Start process(sched=%p) thread id: %lu", (void*)this, NativeThreadID());
+            p->NativeId = NativeThreadID();
             p->Process();
             });
     t.detach();
@@ -427,6 +430,10 @@ uint64_t Scheduler::GetCurrentTaskYieldCount()
 {
     Task* tk = Processer::GetCurrentTask();
     return tk ? tk->yieldCount_ : 0;
+}
+
+Deque<Processer*>& Scheduler::GetProcessers() {
+    return processers_;
 }
 
 void Scheduler::SetCurrentTaskDebugInfo(std::string const& info)

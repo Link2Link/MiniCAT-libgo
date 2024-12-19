@@ -65,6 +65,8 @@ public:
     // 当前协程切换的次数
     uint64_t GetCurrentTaskYieldCount();
 
+    Deque<Processer*>& GetProcessers();
+
     // 设置当前协程调试信息, 打印调试信息时将回显
     void SetCurrentTaskDebugInfo(std::string const& info);
 

@@ -63,6 +63,8 @@ private:
 public:
     ALWAYS_INLINE int Id() { return id_; }
 
+    unsigned long NativeId{};
+
     static Processer* & GetCurrentProcesser();
 
     static Scheduler* GetCurrentScheduler();
